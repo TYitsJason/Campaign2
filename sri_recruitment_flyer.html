@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SRI Recruitment Flyer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #f2e8d5;
+    --parchment-dark: #e8d9bc;
+    --parchment-shadow: #c9b48a;
+    --ink: #1a120a;
+    --ink-faded: #3d2b1a;
+    --ink-light: #5c3d1e;
+    --red-seal: #8b1a1a;
+    --gold: #9a7c2e;
+    --gold-light: #c4a84f;
+    --border-dark: #7a5c2e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #2a1f14;
+    background-image: 
+      radial-gradient(ellipse at center, #3d2e1c 0%, #1a1008 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+    font-family: 'IM Fell English', serif;
+  }
+
+  .document-wrapper {
+    position: relative;
+    max-width: 780px;
+    width: 100%;
+  }
+
+  /* Shadow layers for depth */
+  .document-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 8px -8px -8px 8px;
+    background: #0d0905;
+    border-radius: 2px;
+    z-index: 0;
+  }
+
+  .document {
+    position: relative;
+    z-index: 1;
+    background-color: var(--parchment);
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E"),
+      linear-gradient(160deg, #f5edd8 0%, #ecdcc0 40%, #e5d4b5 70%, #dfc9a8 100%);
+    padding: 60px 70px;
+    border: 1px solid var(--parchment-shadow);
+    box-shadow:
+      inset 0 0 80px rgba(139, 100, 40, 0.15),
+      inset 0 0 20px rgba(100, 70, 20, 0.1);
+  }
+
+  /* Aged edges */
+  .document::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at top left, rgba(120,80,20,0.18) 0%, transparent 50%),
+      radial-gradient(ellipse at top right, rgba(100,60,10,0.12) 0%, transparent 40%),
+      radial-gradient(ellipse at bottom left, rgba(80,50,10,0.15) 0%, transparent 45%),
+      radial-gradient(ellipse at bottom right, rgba(120,80,20,0.2) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Outer decorative border */
+  .outer-border {
+    border: 3px double var(--border-dark);
+    padding: 30px;
+    position: relative;
+  }
+
+  /* Corner ornaments */
+  .outer-border::before,
+  .outer-border::after {
+    content: '✦';
+    position: absolute;
+    font-size: 18px;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .outer-border::before { top: 8px; left: 8px; }
+  .outer-border::after { bottom: 8px; right: 8px; }
+
+  .inner-border {
+    border: 1px solid var(--parchment-shadow);
+    padding: 28px;
+    position: relative;
+  }
+  .inner-border::before,
+  .inner-border::after {
+    content: '✦';
+    position: absolute;
+    font-size: 12px;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .inner-border::before { top: 6px; right: 6px; }
+  .inner-border::after { bottom: 6px; left: 6px; }
+
+  /* Header */
+  .masthead {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .org-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: var(--ink-light);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .title {
+    font-family: 'Cinzel', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 6px;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
+  }
+
+  .subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-light);
+    letter-spacing: 0.15em;
+    margin-bottom: 16px;
+  }
+
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border-dark), transparent);
+  }
+  .divider-ornament {
+    color: var(--gold);
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  /* Classification stamp */
+  .classification {
+    display: inline-block;
+    border: 2px solid var(--red-seal);
+    color: var(--red-seal);
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    padding: 3px 12px;
+    margin-bottom: 20px;
+    opacity: 0.85;
+    transform: rotate(-1deg);
+  }
+
+  /* Body text */
+  .body-text {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--ink-faded);
+    margin-bottom: 20px;
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
+  .body-text:first-of-type::first-letter {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 58px;
+    font-weight: 700;
+    float: left;
+    line-height: 0.75;
+    margin-right: 8px;
+    margin-top: 6px;
+    color: var(--ink);
+  }
+
+  /* Section headers */
+  .section-header {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--ink);
+    text-align: center;
+    margin: 28px 0 16px;
+    text-transform: uppercase;
+  }
+
+  /* Threat box */
+  .threat-box {
+    background: rgba(139, 26, 26, 0.06);
+    border: 1px solid rgba(139, 26, 26, 0.3);
+    border-left: 3px solid var(--red-seal);
+    padding: 16px 20px;
+    margin: 20px 0;
+  }
+
+  .threat-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: var(--red-seal);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .threat-text {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-faded);
+    font-style: italic;
+  }
+
+  /* Commander cards */
+  .commanders-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+    margin: 20px 0;
+  }
+
+  .commander-card {
+    border: 1px solid var(--parchment-shadow);
+    padding: 18px 14px;
+    text-align: center;
+    position: relative;
+    background: rgba(255,255,255,0.15);
+  }
+
+  .commander-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .card-wei::before { background: var(--ink); }
+  .card-shu::before { background: #5c7a2e; }
+  .card-wu::before { background: #8b4a1a; }
+
+  .commander-faction {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .card-wei .commander-faction { color: var(--ink); }
+  .card-shu .commander-faction { color: #5c7a2e; }
+  .card-wu .commander-faction { color: #8b4a1a; }
+
+  .commander-sigil {
+    font-size: 28px;
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+
+  .commander-name {
+    font-family: 'Cinzel', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .commander-title {
+    font-size: 11px;
+    color: var(--ink-light);
+    font-style: italic;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
+  .commander-desc {
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--ink-faded);
+    text-align: left;
+  }
+
+  .commander-motto {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--ink-light);
+    text-transform: uppercase;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--parchment-shadow);
+    font-style: normal;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  .footer-text {
+    font-size: 12px;
+    color: var(--ink-light);
+    line-height: 1.8;
+    font-style: italic;
+  }
+
+  .seal-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .seal {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid var(--red-seal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--red-seal);
+    opacity: 0.7;
+    transform: rotate(-12deg);
+    background: rgba(139,26,26,0.05);
+  }
+
+  .issue-info {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    color: var(--ink-light);
+    text-transform: uppercase;
+    margin-top: 16px;
+  }
+
+  /* Pull quote */
+  .pull-quote {
+    text-align: center;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--ink-light);
+    padding: 14px 30px;
+    border-top: 1px solid var(--parchment-shadow);
+    border-bottom: 1px solid var(--parchment-shadow);
+    margin: 20px 0;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 640px) {
+    .document { padding: 30px 24px; }
+    .outer-border { padding: 16px; }
+    .inner-border { padding: 16px; }
+    .commanders-grid { grid-template-columns: 1fr; }
+    .title { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="document-wrapper">
+  <div class="document">
+    <div class="outer-border">
+      <div class="inner-border">
+
+        <div class="masthead">
+          <div class="org-name">The Sanctum Reclamation Initiative</div>
+          <div class="title">A CALL TO ARMS</div>
+          <div class="subtitle">For Explorers, Scholars, Soldiers & Seekers of All Kinds</div>
+          <div class="divider">
+            <div class="divider-line"></div>
+            <div class="divider-ornament">⚔ ✦ ⚔</div>
+            <div class="divider-line"></div>
+          </div>
+          <div class="classification">Authorized by the Dorenshire Expeditionary Council</div>
+        </div>
+
+        <p class="body-text">
+          The old world is not gone. It sleeps. Beneath the silence of the Ruin, beneath ash and root and the long quiet years Sanctum endures, waiting for those bold enough to return, to reclaim what was lost, and to face whatever now walks in its ruins. The Sanctum Reclamation Initiative was founded upon a single conviction: that the world our ancestors built is worth the cost of getting it back. We are looking for those who share that conviction, and the courage to act on it.
+        </p>
+
+        <p class="body-text">
+          Dorenshire cannot send an army. It can send <em>you</em>. Skilled individuals. Survivors. Dreamers with a weapon hand and enough sense to know when to run. The Initiative has chartered three expeditionary companies to establish footholds across Sanctum's western continent, map its terrain, catalogue its dangers, and push back the darkness that has taken root in our absence. You will be compensated. You will be equipped. And you will be part of something that history will remember.
+        </p>
+
+        <div class="threat-box">
+          <div class="threat-label">⚠ Threat Assessment</div>
+          <div class="threat-text">
+            Intelligence gathered by the Avandrian Academy confirms the presence of <strong>the Collector</strong> — a practitioner of otherworldly magic of unknown origin, who has established dominion over a significant portion of the western continent. The Collector is not of Sanctum. He moves between worlds, absorbing their secrets, capturing their creatures, and discarding what no longer interests him. With the abilities to open rifts on his side, he is believed to be working twoard unmaking the Ancients' legacy using Sanctum as a staging ground, but his plans won't just unmake the Ancients, it will be the end of us all.
+            <br><br>
+            He is extraordinarily dangerous. He has the powers beyond any one of us can fathom, but we can prevail with our efforts combined. He has power beyond worlds, and so do we, his servants work under coersion or fear, but we are a unified force.
+          </div>
+        </div>
+
+        <p class="body-text">
+          The continent is wild and largely unmapped. Its wildlife has been warped and provoked by the Collector's influence. Buildings from before the Ruin dot its interior, some intact, some occupied. You will face genuine peril. We will not pretend otherwise. What we will promise is this: the Initiative's three commanders are the finest minds and boldest leaders Dorenshire has ever produced. Under their direction, and with the collective strength of every expeditioner who answers this call, the Collector can be driven from our world.
+        </p>
+
+        <div class="divider">
+          <div class="divider-line"></div>
+          <div class="divider-ornament">✦</div>
+          <div class="divider-line"></div>
+        </div>
+
+        <div class="section-header">The Three Companies</div>
+        <p class="pull-quote">
+          "Ironward is in charge of logistics, Hearthsworn the military campaign against the collector, and Tidecrest the exploration and mapping of the continent.<br>
+          In time, you will know where you belong."
+        </p>
+
+        <div class="commanders-grid">
+
+          <div class="commander-card card-wei">
+            <div class="commander-faction">Ironward Logistics</div>
+            <div class="commander-sigil">⚙</div>
+            <div class="commander-name">Calder Voss</div>
+            <div class="commander-title">Director of Operations<br>Ironward Logistics</div>
+            <div class="commander-desc">
+              There is no one alive who understands leadership better than Calder Voss. He built Ironward from nothing on a single principle: that talent is the only currency that matters. No noble blood. No old alliances. No favors owed. If you are capable, you will be seen. If you are exceptional, you will be given the room to prove it. His logistics keep camps alive in impossible conditions. His intelligence networks know what other factions learn too late. He does not make promises he cannot keep, and he keeps every promise he makes. Those who work under Voss do not do so out of sentiment. They do so because he is, consistently and demonstrably, right.
+            </div>
+            <div class="commander-motto">"Merit earns the march."</div>
+          </div>
+
+          <div class="commander-card card-shu">
+            <div class="commander-faction">Hearthsworn Company</div>
+            <div class="commander-sigil">🜂</div>
+            <div class="commander-name">Loric Ashvane</div>
+            <div class="commander-title">Company Lead<br>Hearthsworn Company</div>
+            <div class="commander-desc">
+              Loric Ashvane has never asked anyone to follow him. They follow anyway. There is something in the man that people find themselves wanting to protect, not because he is weak, but because what he carries feels worth protecting. He came to the expedition with two of the finest companions anyone has ever seen, and a vision of reclamation that is not about profit or power but about people: the ones who survived the Ruin, the ones who deserve better than what came after it. Hearthsworn is small, but Hearthsworn is fierce. The prowess of the three founders of the company rivals that of an army, with their instincts, their strategy, they'll deal the final blow against the Collector.
+            </div>
+            <div class="commander-motto">"We go together or not at all."</div>
+          </div>
+
+          <div class="commander-card card-wu">
+            <div class="commander-faction">Tidecrest Shipping</div>
+            <div class="commander-sigil">⚓</div>
+            <div class="commander-name">Edric Solane</div>
+            <div class="commander-title">Founding Patriarch<br>Tidecrest Shipping</div>
+            <div class="commander-desc">
+              Edric Solane was on the first ship that settled Dorenshire. That alone would be enough, but Edric is not a man content with enough. Tidecrest is a family enterprise in the deepest sense, every person under its banner is considered an extension of that family, entitled to its protection, its resources, and its ferocious loyalty when threatened. The Solane name opens doors that others don't know exist. Their network of merchants and explorers is the widest on the continent. Their ships are what will carry us into the frontier, their intelligence is what will keep you alive. Whether that's to navigate the long forgotten worlds of old, or the politcal landscape back at home, Tidecrest is the company you need to know.
+            </div>
+            <div class="commander-motto">"Family holds the shore."</div>
+          </div>
+
+        </div>
+
+        <div class="divider">
+          <div class="divider-line"></div>
+          <div class="divider-ornament">✦</div>
+          <div class="divider-line"></div>
+        </div>
+
+        <p class="body-text">
+          All three companies operate under the Initiative's charter and will cooperate against the Collector's forces as a unified expeditionary body. Resources, intelligence, and mutual aid agreements are shared across company lines for the duration of the primary threat. Expeditioners are free to accept contracts from any company, though if any speak to you directly, your position will be assigned accordingly.
+        </p>
+
+        <div class="footer">
+          <div class="divider">
+            <div class="divider-line"></div>
+            <div class="divider-ornament">⚔ ✦ ⚔</div>
+            <div class="divider-line"></div>
+          </div>
+          <p class="footer-text">
+            Report to any Initiative waystation upon arrival at the western coast.<br>
+            Standard expedition contracts, equipment allotments, and company introductions<br>
+            will be arranged upon processing. Bring your skills. Bring your stories.<br>
+            <em>Leave nothing behind that you are not prepared to lose.</em>
+          </p>
+          <div class="seal-row">
+            <div class="seal">⚜</div>
+          </div>
+          <div class="issue-info">Issued by the Sanctum Reclamation Initiative · Dorenshire Expeditionary Council</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

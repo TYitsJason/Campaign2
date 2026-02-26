@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Player Guide — AstraArcanum West Marches</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #12100e;
+    --surface: #1c1814;
+    --surface-raised: #231f1a;
+    --border: #3a3028;
+    --border-bright: #5a4a38;
+    --gold: #c4a84f;
+    --gold-dim: #8a7035;
+    --gold-glow: rgba(196, 168, 79, 0.12);
+    --text: #e8dcc8;
+    --text-dim: #a89880;
+    --text-muted: #6a5a48;
+    --red: #c44a3a;
+    --red-dim: #7a2a1e;
+    --green: #5a8a4a;
+    --green-dim: #3a5a2e;
+    --blue: #4a6a9a;
+    --wei-color: #8ab0d8;
+    --shu-color: #7ab87a;
+    --wu-color: #d89a5a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    background-image: radial-gradient(ellipse at 50% 0%, #1e1a14 0%, #0e0c0a 60%);
+    color: var(--text);
+    font-family: 'IM Fell English', serif;
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+    line-height: 1.75;
+  }
+
+  /* Subtle grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    padding: 50px 40px 40px;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% -20%, var(--gold-glow) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .ooc-badge {
+    display: inline-block;
+    border: 1px solid var(--gold-dim);
+    color: var(--gold-dim);
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    padding: 4px 14px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  .header h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    text-shadow: 0 0 40px rgba(196,168,79,0.3);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+
+  .header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-dim);
+    letter-spacing: 0.2em;
+    margin-bottom: 24px;
+  }
+
+  .header-intro {
+    font-size: 15px;
+    color: var(--text-dim);
+    max-width: 580px;
+    margin: 0 auto;
+    font-style: italic;
+    line-height: 1.8;
+  }
+
+  /* ── Navigation pills ── */
+  .nav-pills {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-top: none;
+    border-bottom: none;
+    background: var(--surface-raised);
+    overflow-x: auto;
+  }
+
+  .nav-pill {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: 12px 18px;
+    border-right: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  .nav-pill:last-child { border-right: none; }
+
+  /* ── Main content ── */
+  .content {
+    border: 1px solid var(--border);
+    border-top: none;
+    background: var(--surface);
+  }
+
+  /* ── Sections ── */
+  .section {
+    padding: 40px 50px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 6px;
+  }
+
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-title span {
+    color: var(--gold);
+  }
+
+  p {
+    font-size: 15px;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    line-height: 1.85;
+  }
+  p:last-child { margin-bottom: 0; }
+
+  strong {
+    color: var(--text);
+    font-style: normal;
+  }
+
+  em {
+    color: var(--text);
+  }
+
+  /* ── Info blocks ── */
+  .info-block {
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold-dim);
+    padding: 16px 20px;
+    margin: 20px 0;
+  }
+
+  .info-block p { margin-bottom: 10px; }
+  .info-block p:last-child { margin-bottom: 0; }
+
+  .warn-block {
+    background: rgba(196, 74, 58, 0.05);
+    border: 1px solid var(--red-dim);
+    border-left: 3px solid var(--red);
+    padding: 16px 20px;
+    margin: 20px 0;
+  }
+
+  .good-block {
+    background: rgba(90, 138, 74, 0.05);
+    border: 1px solid var(--green-dim);
+    border-left: 3px solid var(--green);
+    padding: 16px 20px;
+    margin: 20px 0;
+  }
+
+  /* ── Faction cards ── */
+  .faction-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+
+  .faction-card {
+    border: 1px solid var(--border);
+    padding: 20px 16px;
+    background: var(--surface-raised);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .faction-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+
+  .card-wei::before { background: var(--wei-color); }
+  .card-shu::before { background: var(--shu-color); }
+  .card-wu::before { background: var(--wu-color); }
+
+  .faction-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .card-wei::after { background: radial-gradient(ellipse at 50% 0%, rgba(138,176,216,0.05) 0%, transparent 70%); opacity: 1; }
+  .card-shu::after { background: radial-gradient(ellipse at 50% 0%, rgba(122,184,122,0.05) 0%, transparent 70%); opacity: 1; }
+  .card-wu::after { background: radial-gradient(ellipse at 50% 0%, rgba(216,154,90,0.05) 0%, transparent 70%); opacity: 1; }
+
+  .faction-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+    display: block;
+    position: relative;
+    z-index: 1;
+  }
+
+  .faction-name {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    position: relative;
+    z-index: 1;
+  }
+  .card-wei .faction-name { color: var(--wei-color); }
+  .card-shu .faction-name { color: var(--shu-color); }
+  .card-wu .faction-name { color: var(--wu-color); }
+
+  .faction-lord {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .faction-traits {
+    list-style: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .faction-traits li {
+    font-size: 12.5px;
+    color: var(--text-dim);
+    padding: 4px 0;
+    border-bottom: 1px solid var(--border);
+    padding-left: 14px;
+    position: relative;
+    margin: 0;
+  }
+  .faction-traits li:last-child { border-bottom: none; }
+  .faction-traits li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--text-muted);
+  }
+
+  /* ── Timeline block ── */
+  .timeline {
+    margin: 20px 0;
+    position: relative;
+    padding-left: 24px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold-dim), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+  }
+  .timeline-item:last-child { margin-bottom: 0; }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -21px;
+    top: 8px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gold-dim);
+    border: 1px solid var(--gold);
+  }
+
+  .timeline-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .timeline-text {
+    font-size: 14px;
+    color: var(--text-dim);
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .divider-mark {
+    color: var(--gold-dim);
+    font-size: 12px;
+  }
+
+  /* ── Checklist ── */
+  .checklist {
+    list-style: none;
+    margin: 16px 0;
+  }
+  .checklist li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text-dim);
+    margin: 0;
+    line-height: 1.65;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-icon {
+    color: var(--gold);
+    font-size: 13px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  /* ── Footer ── */
+  .doc-footer {
+    text-align: center;
+    padding: 30px;
+    border: 1px solid var(--border);
+    border-top: none;
+    background: var(--surface-raised);
+    position: relative;
+  }
+
+  .doc-footer::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+  }
+
+  .footer-text {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  .footer-sig {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-top: 14px;
+  }
+
+  @media (max-width: 640px) {
+    .section { padding: 28px 24px; }
+    .faction-grid { grid-template-columns: 1fr; }
+    .header { padding: 36px 24px 30px; }
+    .header h1 { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="ooc-badge">Out of Character · Player Briefing</div>
+    <h1>Project Reclamation</h1>
+    <h2>A Campaign Guide for Expeditioners</h2>
+    <p class="header-intro">
+      Everything you need to know before your first session, how this campaign works, what's expected of you, and how to make the most of the world we're building together.
+    </p>
+  </div>
+
+  <!-- Nav -->
+  <div class="nav-pills">
+    <div class="nav-pill">I. Your Character</div>
+    <div class="nav-pill">II. Choose Your Lord</div>
+    <div class="nav-pill">III. How Sessions Work</div>
+    <div class="nav-pill">IV. Between Sessions</div>
+    <div class="nav-pill">V. Faction Actions</div>
+    <div class="nav-pill">VI. The Chronicle</div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Section I -->
+    <div class="section">
+      <div class="section-label">Section I</div>
+      <div class="section-title">Making Your <span>Character</span></div>
+
+      <p>
+        You will begin play at <strong>Level 3</strong>. At this level you have enough experience to survive the frontier but enough runway ahead to grow into something genuinely formidable. The continent will challenge you accordingly.
+      </p>
+
+      <p>
+        Your backstory should explain at minimum <strong>why you are here</strong>. The Sanctum Reclamation Initiative is a real organization with real stakes. Your character made a choice to join an expedition into a ruined and dangerous world. That choice should mean something. Were you born on Dorenshire and grew up hearing stories of the old world? Did you come through a rift and have nothing left to go back to? Are you chasing something? Knowledge, glory, a debt, a name? You don't need a ten-page biography. You need a reason that feels true.
+      </p>
+
+      <div class="info-block">
+        <p><strong>On secrets:</strong> You are welcome, encouraged, even, to have things your character has not told anyone (if you've played in the Legacy of Winterhome campaign I ran, something like that). A history they've buried. An allegiance that isn't in the paperwork. A reason for being here that goes beyond what they've said out loud. The campaign will give those secrets room to breathe. Just make sure <em>you</em> know what they are, even if no one else does yet.</p>
+      </div>
+
+      <p>
+        You are all arriving on the same continent, under the same Initiative charter, at the same time. You may know each other already, fellow Academy graduates, old traveling companions, rivals who ended up on the same ship; or you may be meeting for the first time. Either works. Talk to the other players before session one if you want to establish prior connections.
+      </p>
+
+      <ul class="checklist">
+        <li><span class="check-icon">✦</span><span><strong>Level 3, standard character creation rules.</strong> Use 27 point point buy for stats. All official D&D content are allowed for character creation.</span></li>
+        <li><span class="check-icon">✦</span><span><strong>A backstory that explains your presence.</strong> It doesn't need to be long. And remember to make your backstory fit with a 3rd level character.</span></li>
+        <li><span class="check-icon">✦</span><span><strong>A secret, if you want one.</strong> Something only you know. Something that might matter later. Or maybe you really are just an open book</span></li>
+        <li><span class="check-icon">✦</span><span><strong>A relationship, if you want one.</strong> Coordinate with another player if you'd like a shared history coming in.</span></li>
+      </ul>
+    </div>
+
+    <!-- Section II -->
+    <div class="section">
+      <div class="section-label">Section II</div>
+      <div class="section-title">Choose Your <span>Lord</span></div>
+
+      <p>
+        Before your first session, you will declare which of the three commanders you are primarily aligned with. This is not a contract written in blood, alliances shift, circumstances change, and the campaign will give you reasons to reconsider. But you are starting somewhere, and where you start matters.
+      </p>
+
+      <p>
+        Think of it less as choosing a boss and more as choosing a value system or your preferred playstyles (though each faction will have a mix of all 3). Each commander represents something. The people around them reflect it. When you're deciding what your character would do in a hard moment, your lord's philosophy is the gravity you're pulling against or alongside.
+      </p>
+
+      <div class="faction-grid">
+        <div class="faction-card card-wei">
+          <span class="faction-icon">⚙</span>
+          <div class="faction-name">Ironward Shipping</div>
+          <div class="faction-lord">Commander: Calder Voss</div>
+          <ul class="faction-traits">
+            <li>Merit above all else</li>
+            <li>Best logistics on the continent</li>
+            <li>Ruthlessly competent leadership</li>
+            <li>No questions about your past</li>
+            <li>Results are what matter</li>
+            <li>Choose them if you like planning and scheming</li>
+          </ul>
+        </div>
+        <div class="faction-card card-shu">
+          <span class="faction-icon">🜂</span>
+          <div class="faction-name">Hearthsworn Company</div>
+          <div class="faction-lord">Commander: Loric Ashvane</div>
+          <ul class="faction-traits">
+            <li>Loyalty as a way of life</li>
+            <li>The smallest, most believed-in faction</li>
+            <li>Led by principle over pragmatism</li>
+            <li>The people you'd die for</li>
+            <li>The cause matters as much as the victory</li>
+            <li>Choose them if you like combat</li>
+          </ul>
+        </div>
+        <div class="faction-card card-wu">
+          <span class="faction-icon">⚓</span>
+          <div class="faction-name">Tidecrest Shipping</div>
+          <div class="faction-lord">Commander: Edric Solane</div>
+          <ul class="faction-traits">
+            <li>Family — chosen or blood — is everything</li>
+            <li>Widest network of alliances</li>
+            <li>Long-term thinkers, patient actors</li>
+            <li>Protect your own, always</li>
+            <li>Know the landscape before you move</li>
+            <li>Choose them if you like exploration</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="warn-block">
+        <p><strong>This choice will matter.</strong> It will affect information flow, your starting camps and companions, but allegiances can shift, and things can change. For now, you have a common purpose, but your actions may permanently change the relationships between the three.</p>
+      </div>
+
+      <p>
+        You are free to take quests from any company, build friendships across faction lines, and maintain relationships with all three lords throughout the campaign. 
+      </p>
+    </div>
+
+    <!-- Section III -->
+    <div class="section">
+      <div class="section-label">Section III</div>
+      <div class="section-title">How <span>Sessions</span> Work</div>
+
+      <p>
+        This is a <strong>West Marches</strong> campaign. If you haven't played in one before, the core idea is this: there is no fixed party, no fixed schedule, and no expectation that everyone attends every session. The world exists and moves whether you are at the table or not. You show up when you can, you go on an expedition, and life on the frontier continues.
+      </p>
+
+      <p>
+        Each session represents <strong>one week of in-world time</strong>. A group of players will gather, take a contract or pursue a lead, venture into the continent, and return. That is one week. While they are gone, everyone else is living their life at the base camp, taking faction actions, building relationships, managing whatever the world is handing them.
+      </p>
+
+      <div class="info-block">
+        <p><strong>You are not expected to attend every session.</strong> Life happens. The campaign is designed with it as the guiding philosophy. What matters is that when you are there, you are present, and that between sessions, you stay connected to the world through Discord roleplay and faction actions.</p>
+      </div>
+
+      <div class="divider"><div class="divider-line"></div><div class="divider-mark">✦</div><div class="divider-line"></div></div>
+
+      <p>
+        Sessions will be <strong>scheduled by player interest</strong>. When a group wants to run a mission, they coordinate a time, declare their intent to the DM, and we play. Missions can be anything: a contract from one of the companies, a lead someone discovered in the previous session, a personal quest, a response to something happening in the world. You drive the agenda.
+      </p>
+
+      <p>
+        There are no railroads. There is also no guarantee of safety. The continent is genuinely dangerous, and not every expedition will go as planned. Come prepared. Communicate with your party. And remember that the choices your group makes on a mission will have consequences, for the world, for the NPCs involved, and sometimes for players who weren't there.
+      </p>
+    </div>
+
+    <!-- Section IV -->
+    <div class="section">
+      <div class="section-label">Section IV</div>
+      <div class="section-title">Between <span>Sessions</span></div>
+
+      <p>
+        The campaign lives on <strong>Discord</strong> between sessions. This is where the world breathes. News travels. Relationships deepen. Plots develop. You are not required to participate at any particular intensity — some players will be active daily, others will check in occasionally — but the more you engage, the more the world will feel like yours.
+      </p>
+
+      <p>
+        Between sessions, <strong>time passes in real time</strong>. If a week passes in the real world between sessions, a week has passed in the world. Events occur. NPCs make decisions. The Collector's influence shifts. Faction politics evolve. Things that happened in the last session have had time to settle or escalate. Treat the Discord not as a waiting room but as the campaign itself, but a slower, quieter version of it.
+      </p>
+
+      <div class="good-block">
+        <p><strong>What you can do between sessions:</strong> Roleplay with other players and NPCs in character. Pursue personal storylines through text RP with DM involvement. Gather information, build trust, or sow chaos. Spend time with your lord and their inner circle. Follow up on things that happened in the last session. The world is available to you, at least, your base camp is.</p>
+      </div>
+
+      <p>
+        Significant between-session roleplay may have mechanical consequences, information gained, relationships built or damaged, small actions that ripple into future sessions. Pay attention. The campaign rewards engagement, and not always in the ways you expect.
+      </p>
+    </div>
+
+    <!-- Section V -->
+    <div class="section">
+      <div class="section-label">Section V</div>
+      <div class="section-title">Faction <span>Actions</span></div>
+
+      <p>
+        When you are not on an active expedition, you take a <strong>Faction Action</strong> — a structured choice about how your character spends their week at base (if you're in my Fire Emblem campaign, you'll recognize this). Faction Actions represent the non-adventuring work of building a foothold on a new continent: strengthening infrastructure, gathering intelligence, training, trading, diplomacy. They are how the base camp grows.
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-label">Build</div>
+          <p class="timeline-text">Contribute labor and resources toward a specific base upgrade, fortifications, resource production, a proper infirmary, expanded stables. Build actions accumulate toward unlocking new capabilities for everyone.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-label">Oversee</div>
+          <p class="timeline-text">Oversee resource production, stockpile supplies. Oversee actions drive output from buildings in your camp, whether to generate resources that fuel future expeditions and faction projects or otherwise.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-label">Train</div>
+          <p class="timeline-text">Spend the week in intensive preparation. Train actions provide experience for your character, letting you keep up pace in levels even if you don't participate in sessions as often.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-label">Investigate</div>
+          <p class="timeline-text">Sometime the story will require you to spend some time to follow leads, investigate clues, and rather than playing out every detail, you're just going to have to devote your time to get it done.</p>
+        </div>
+      </div>
+
+      <p>
+        Full faction action rules — including specific mechanical outcomes and resource costs, will be in the relevant Discord channel. This mechanic ensures that you will always have something meaningful to do even when you can't make a session.
+      </p>
+    </div>
+
+    <!-- Section VI -->
+    <div class="section">
+      <div class="section-label">Section VI</div>
+      <div class="section-title">The <span>Chronicle</span></div>
+
+      <p>
+        Every expedition will be documented in <strong>The SRI Field Chronicle</strong>, an in-world record kept by the Initiative's designated chronicler, posted to the Discord for all players to read after each session. The Chronicle is written from an in-world perspective: it is the official record, which means it reflects what the Initiative was told happened, not necessarily the full truth.
+      </p>
+
+      <p>
+        The Chronicle exists so that players who missed a session can stay informed, and so that players who <em>were</em> there can see their actions reflected in the world's memory. It also means that information can be managed, if your group comes back from an expedition and decides not to report certain things, those things won't be in the Chronicle. Other players won't know unless they find out some other way.
+      </p>
+
+      <div class="info-block">
+        <p><strong>Secrets are possible.</strong> The Chronicle records what is reported. What is not reported remains unknown, until it isn't. If your group discovered something you'd rather keep between yourselves, you can choose what makes it into the official record. Bear in mind that other parties on the same continent may eventually find the same things, and the world does not wait for you to decide what to do with what you know.</p>
+      </div>
+
+      <p>
+        Read the Chronicle, or don't. Even if you were on the expedition, there may be things you forgot about or simply didn't see. The picture of this continent is assembled from many partial views. Yours is only one of them.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    <p class="footer-text">
+      This campaign is built on the choices you make in sessions and in the quiet moments between them<br>
+      when you decide what kind of person your character is when no one important is watching.<br>
+    </p>
+    <div class="footer-sig">AstraArcanum · West Marches of Sanctum · Player Briefing v1.0</div>
+  </div>
+
+</div>
+</body>
+</html>
